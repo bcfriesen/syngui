@@ -1,13 +1,14 @@
 #include <gtk/gtk.h>
 
 static void
-save_params (GtkWidget * widget, GtkWidget * kid1)
+save_params (GtkWidget * widget, GtkWidget * kid_array[])
 {
-  gint *kid1_txt;
-  kid1_txt = (gint *) gtk_entry_get_text (GTK_ENTRY (kid1));
+  gint *kid1_txt, *kid2_txt;
+  kid1_txt = (gint *) gtk_entry_get_text (GTK_ENTRY (kid_array[0]));
+  kid2_txt = (gint *) gtk_entry_get_text (GTK_ENTRY (kid_array[1]));
   g_print ("Saving params...\n");
-  g_print ((const gchar *) kid1_txt);
-  g_print ("\n");
+  g_print ("Kurucz ID #1: %s\n", (const gchar *) kid1_txt);
+  g_print ("Kurucz ID #2: %s\n", (const gchar *) kid2_txt);
 }
 
 static gboolean
@@ -24,6 +25,7 @@ main (int argc, char **argv)
   GtkWidget *window;
   GtkWidget *quit_button, *save_params_button;
   GtkWidget *kid1, *kid2;
+  GtkWidget *kid_array[2];	/* array of pointers to Kurucz ID entries */
   GError *error = NULL;
 
   gtk_init (&argc, &argv);
@@ -44,15 +46,19 @@ main (int argc, char **argv)
   kid1 = GTK_WIDGET (gtk_builder_get_object (builder, "s01_kurucz_id_entry"));
   kid2 = GTK_WIDGET (gtk_builder_get_object (builder, "s02_kurucz_id_entry"));
 
+  kid_array[0] = kid1;
+  kid_array[1] = kid2;
+
   gtk_builder_connect_signals (builder, NULL);
   /* destroy builder after we've connected all the widgets */
   g_object_unref (G_OBJECT (builder));
 
+  /* now connect all the signals */
   g_signal_connect (window, "delete-event", G_CALLBACK (delete_event), NULL);
   g_signal_connect (quit_button, "clicked", G_CALLBACK (delete_event),
 		    window);
   g_signal_connect (save_params_button, "clicked", G_CALLBACK (save_params),
-		    kid1);
+		    kid_array);
   g_signal_connect_swapped (quit_button, "clicked",
 			    G_CALLBACK (gtk_widget_destroy), window);
 
