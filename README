@@ -13,6 +13,9 @@ SYN++.
     - GTK+ v2
         - I haven't tested this on GTK+ v3.
 
+    - gtkmm >=2.24
+        - These are the C++ bindings to GTK+ v2.
+
 
 /----------------------\
 | COMPILE INSTRUCTIONS |
@@ -20,6 +23,6 @@ SYN++.
 
 Run something like
 
-    gcc run_syngui.c `pkg-config --cflags --libs gtk+-2.0`
+    g++ run_syngui.cc `pkg-config --cflags --libs gtkmm-2.4`
 
 I've tried this on Ubuntu 12.10 and Macports-based GTK+ on OS X 10.6.
