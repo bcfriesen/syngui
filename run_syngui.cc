@@ -34,7 +34,7 @@ int main(int argc, char* argv[])
     Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create();
 
     try {
-        builder->add_from_file("../syn++-gui-gtk2.glade");
+        builder->add_from_file("syn++-gui-gtk2.glade");
     } catch(const Glib::FileError& ex) {
         std::cerr << "FileError: " << ex.what() << std::endl;
         return 1;
