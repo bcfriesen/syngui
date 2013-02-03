@@ -100,12 +100,12 @@ int main(int argc, char* argv[])
 
     builder->get_widget("syn++-gui_window", pWindow);
 
-    builder->get_widget("quit_button", pQuitButton);
+    builder->get_widget("quit_btn", pQuitButton);
     if (pQuitButton) {
         pQuitButton->signal_clicked().connect (sigc::ptr_fun(quit_syngui));
     }
 
-    builder->get_widget("save_params_button", pSaveParamsButton);
+    builder->get_widget("save_params_btn", pSaveParamsButton);
     if (pSaveParamsButton) {
         pSaveParamsButton->signal_clicked().connect (sigc::ptr_fun(print_kids));
     }
