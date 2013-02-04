@@ -2,13 +2,115 @@
 <interface>
   <requires lib="gtk+" version="2.18"/>
   <!-- interface-naming-policy project-wide -->
-  <object class="GtkAdjustment" id="s01_kurucz_id_spin_adj">
-    <property name="upper">9999</property>
+  <object class="GtkAdjustment" id="T_phot_adj">
+    <property name="lower">1</property>
+    <property name="upper">99</property>
+    <property name="value">12</property>
+    <property name="step_increment">0.25</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="max_wl_adj">
+    <property name="lower">2001</property>
+    <property name="upper">20001</property>
+    <property name="value">10000</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
-  <object class="GtkAdjustment" id="s02_kurucz_id_spin_adj">
+  <object class="GtkAdjustment" id="min_wl_adj">
+    <property name="lower">2000</property>
+    <property name="upper">20000</property>
+    <property name="value">3300</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="s01_T_ex_adj">
+    <property name="lower">0.10000000000000001</property>
+    <property name="upper">100</property>
+    <property name="value">10</property>
+    <property name="step_increment">0.10000000000000001</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="s01_aux_adj">
+    <property name="lower">0.01</property>
+    <property name="upper">100</property>
+    <property name="value">1</property>
+    <property name="step_increment">0.01</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="s01_kid_adj">
+    <property name="lower">100</property>
     <property name="upper">9999</property>
+    <property name="value">1101</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="s01_logtau_adj">
+    <property name="lower">-10</property>
+    <property name="upper">100</property>
+    <property name="value">1</property>
+    <property name="step_increment">0.10000000000000001</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="s01_v_max_adj">
+    <property name="lower">1</property>
+    <property name="upper">100</property>
+    <property name="value">60</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="s01_v_min_adj">
+    <property name="lower">1</property>
+    <property name="upper">100</property>
+    <property name="value">10</property>
+    <property name="step_increment">0.10000000000000001</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="s02_T_ex_adj">
+    <property name="lower">0.10000000000000001</property>
+    <property name="upper">100</property>
+    <property name="value">10</property>
+    <property name="step_increment">0.10000000000000001</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="s02_aux_adj">
+    <property name="lower">0.01</property>
+    <property name="upper">100</property>
+    <property name="value">1</property>
+    <property name="step_increment">0.01</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="s02_kid_adj">
+    <property name="lower">100</property>
+    <property name="upper">9999</property>
+    <property name="value">2601</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="s02_logtau_adj">
+    <property name="lower">-10</property>
+    <property name="upper">100</property>
+    <property name="value">1</property>
+    <property name="step_increment">0.10000000000000001</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="s02_v_max_adj">
+    <property name="lower">1</property>
+    <property name="upper">100</property>
+    <property name="value">60</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="s02_v_min_adj">
+    <property name="lower">1</property>
+    <property name="upper">100</property>
+    <property name="value">10</property>
+    <property name="step_increment">0.10000000000000001</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="v_outer_adj">
+    <property name="lower">1</property>
+    <property name="upper">99</property>
+    <property name="value">60</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
@@ -160,7 +262,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkEntry" id="s01_logtau_entry">
+                      <object class="GtkSpinButton" id="s01_kid_spinbtn">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="max_length">4</property>
@@ -169,6 +271,46 @@
                         <property name="secondary_icon_activatable">False</property>
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
+                        <property name="adjustment">s01_kid_adj</property>
+                        <property name="numeric">True</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="x_options">GTK_EXPAND</property>
+                        <property name="y_options">GTK_EXPAND</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkSpinButton" id="s02_kid_spinbtn">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="max_length">4</property>
+                        <property name="invisible_char">●</property>
+                        <property name="primary_icon_activatable">False</property>
+                        <property name="secondary_icon_activatable">False</property>
+                        <property name="primary_icon_sensitive">True</property>
+                        <property name="secondary_icon_sensitive">True</property>
+                        <property name="adjustment">s02_kid_adj</property>
+                        <property name="numeric">True</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">2</property>
+                        <property name="right_attach">3</property>
+                        <property name="x_options">GTK_EXPAND</property>
+                        <property name="y_options">GTK_EXPAND</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkSpinButton" id="s01_logtau_spinbtn">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="invisible_char">●</property>
+                        <property name="primary_icon_activatable">False</property>
+                        <property name="secondary_icon_activatable">False</property>
+                        <property name="primary_icon_sensitive">True</property>
+                        <property name="secondary_icon_sensitive">True</property>
+                        <property name="adjustment">s01_logtau_adj</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -180,15 +322,15 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkEntry" id="s02_logtau_entry">
+                      <object class="GtkSpinButton" id="s02_logtau_spinbtn">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="max_length">4</property>
                         <property name="invisible_char">●</property>
                         <property name="primary_icon_activatable">False</property>
                         <property name="secondary_icon_activatable">False</property>
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
+                        <property name="adjustment">s02_logtau_adj</property>
                       </object>
                       <packing>
                         <property name="left_attach">2</property>
@@ -200,15 +342,15 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkEntry" id="s01_v_min_entry">
+                      <object class="GtkSpinButton" id="s01_v_min_spinbtn">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="max_length">4</property>
                         <property name="invisible_char">●</property>
                         <property name="primary_icon_activatable">False</property>
                         <property name="secondary_icon_activatable">False</property>
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
+                        <property name="adjustment">s01_v_min_adj</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -220,15 +362,15 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkEntry" id="s02_v_min_entry">
+                      <object class="GtkSpinButton" id="s02_v_min_spinbtn">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="max_length">4</property>
                         <property name="invisible_char">●</property>
                         <property name="primary_icon_activatable">False</property>
                         <property name="secondary_icon_activatable">False</property>
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
+                        <property name="adjustment">s02_v_min_adj</property>
                       </object>
                       <packing>
                         <property name="left_attach">2</property>
@@ -240,15 +382,15 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkEntry" id="s01_v_max_entry">
+                      <object class="GtkSpinButton" id="s01_v_max_spinbtn">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="max_length">4</property>
                         <property name="invisible_char">●</property>
                         <property name="primary_icon_activatable">False</property>
                         <property name="secondary_icon_activatable">False</property>
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
+                        <property name="adjustment">s01_v_max_adj</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -260,15 +402,15 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkEntry" id="s02_v_max_entry">
+                      <object class="GtkSpinButton" id="s02_v_max_spinbtn">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="max_length">4</property>
                         <property name="invisible_char">●</property>
                         <property name="primary_icon_activatable">False</property>
                         <property name="secondary_icon_activatable">False</property>
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
+                        <property name="adjustment">s02_v_max_adj</property>
                       </object>
                       <packing>
                         <property name="left_attach">2</property>
@@ -280,15 +422,15 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkEntry" id="s01_aux_entry">
+                      <object class="GtkSpinButton" id="s01_aux_spinbtn">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="max_length">4</property>
                         <property name="invisible_char">●</property>
                         <property name="primary_icon_activatable">False</property>
                         <property name="secondary_icon_activatable">False</property>
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
+                        <property name="adjustment">s01_aux_adj</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -300,15 +442,15 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkEntry" id="s02_aux_entry">
+                      <object class="GtkSpinButton" id="s02_aux_spinbtn">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="max_length">4</property>
                         <property name="invisible_char">●</property>
                         <property name="primary_icon_activatable">False</property>
                         <property name="secondary_icon_activatable">False</property>
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
+                        <property name="adjustment">s02_aux_adj</property>
                       </object>
                       <packing>
                         <property name="left_attach">2</property>
@@ -320,15 +462,15 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkEntry" id="s01_T_ex_entry">
+                      <object class="GtkSpinButton" id="s01_T_ex_spinbtn">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="max_length">6</property>
                         <property name="invisible_char">●</property>
                         <property name="primary_icon_activatable">False</property>
                         <property name="secondary_icon_activatable">False</property>
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
+                        <property name="adjustment">s01_T_ex_adj</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -340,61 +482,21 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkEntry" id="s02_T_ex_entry">
+                      <object class="GtkSpinButton" id="s02_T_ex_spinbtn">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="max_length">6</property>
                         <property name="invisible_char">●</property>
                         <property name="primary_icon_activatable">False</property>
                         <property name="secondary_icon_activatable">False</property>
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
+                        <property name="adjustment">s02_T_ex_adj</property>
                       </object>
                       <packing>
                         <property name="left_attach">2</property>
                         <property name="right_attach">3</property>
                         <property name="top_attach">6</property>
                         <property name="bottom_attach">7</property>
-                        <property name="x_options">GTK_EXPAND</property>
-                        <property name="y_options">GTK_EXPAND</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkSpinButton" id="s01_kurucz_id_spinbtn">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="max_length">4</property>
-                        <property name="invisible_char">●</property>
-                        <property name="primary_icon_activatable">False</property>
-                        <property name="secondary_icon_activatable">False</property>
-                        <property name="primary_icon_sensitive">True</property>
-                        <property name="secondary_icon_sensitive">True</property>
-                        <property name="adjustment">s01_kurucz_id_spin_adj</property>
-                        <property name="numeric">True</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="right_attach">2</property>
-                        <property name="x_options">GTK_EXPAND</property>
-                        <property name="y_options">GTK_EXPAND</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkSpinButton" id="s02_kurucz_id_spinbtn">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="max_length">4</property>
-                        <property name="invisible_char">●</property>
-                        <property name="primary_icon_activatable">False</property>
-                        <property name="secondary_icon_activatable">False</property>
-                        <property name="primary_icon_sensitive">True</property>
-                        <property name="secondary_icon_sensitive">True</property>
-                        <property name="adjustment">s02_kurucz_id_spin_adj</property>
-                        <property name="numeric">True</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">2</property>
-                        <property name="right_attach">3</property>
                         <property name="x_options">GTK_EXPAND</property>
                         <property name="y_options">GTK_EXPAND</property>
                       </packing>
@@ -465,61 +567,6 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkEntry" id="v_phot_entry">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="invisible_char">●</property>
-                        <property name="primary_icon_activatable">False</property>
-                        <property name="secondary_icon_activatable">False</property>
-                        <property name="primary_icon_sensitive">True</property>
-                        <property name="secondary_icon_sensitive">True</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="right_attach">2</property>
-                        <property name="x_options">GTK_EXPAND</property>
-                        <property name="y_options">GTK_EXPAND</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkEntry" id="T_phot_entry">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="invisible_char">●</property>
-                        <property name="primary_icon_activatable">False</property>
-                        <property name="secondary_icon_activatable">False</property>
-                        <property name="primary_icon_sensitive">True</property>
-                        <property name="secondary_icon_sensitive">True</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="right_attach">2</property>
-                        <property name="top_attach">1</property>
-                        <property name="bottom_attach">2</property>
-                        <property name="x_options">GTK_EXPAND</property>
-                        <property name="y_options">GTK_EXPAND</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkEntry" id="v_outer_entry">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="invisible_char">●</property>
-                        <property name="primary_icon_activatable">False</property>
-                        <property name="secondary_icon_activatable">False</property>
-                        <property name="primary_icon_sensitive">True</property>
-                        <property name="secondary_icon_sensitive">True</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="right_attach">2</property>
-                        <property name="top_attach">2</property>
-                        <property name="bottom_attach">3</property>
-                        <property name="x_options">GTK_EXPAND</property>
-                        <property name="y_options">GTK_EXPAND</property>
-                      </packing>
-                    </child>
-                    <child>
                       <object class="GtkLabel" id="min_wl_label">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
@@ -542,44 +589,6 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkEntry" id="min_wl_entry">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="invisible_char">●</property>
-                        <property name="primary_icon_activatable">False</property>
-                        <property name="secondary_icon_activatable">False</property>
-                        <property name="primary_icon_sensitive">True</property>
-                        <property name="secondary_icon_sensitive">True</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="right_attach">2</property>
-                        <property name="top_attach">3</property>
-                        <property name="bottom_attach">4</property>
-                        <property name="x_options">GTK_EXPAND</property>
-                        <property name="y_options">GTK_EXPAND</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkEntry" id="max_wl_entry">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="invisible_char">●</property>
-                        <property name="primary_icon_activatable">False</property>
-                        <property name="secondary_icon_activatable">False</property>
-                        <property name="primary_icon_sensitive">True</property>
-                        <property name="secondary_icon_sensitive">True</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="right_attach">2</property>
-                        <property name="top_attach">4</property>
-                        <property name="bottom_attach">5</property>
-                        <property name="x_options">GTK_EXPAND</property>
-                        <property name="y_options">GTK_EXPAND</property>
-                      </packing>
-                    </child>
-                    <child>
                       <object class="GtkLabel" id="wl_step_entry">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
@@ -591,14 +600,119 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkEntry" id="wl_step_entr">
+                      <object class="GtkSpinButton" id="v_phot_spinbtn">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
+                        <property name="max_length">4</property>
                         <property name="invisible_char">●</property>
                         <property name="primary_icon_activatable">False</property>
                         <property name="secondary_icon_activatable">False</property>
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
+                        <property name="adjustment">v_phot_adj</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="x_options">GTK_EXPAND</property>
+                        <property name="y_options">GTK_EXPAND</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkSpinButton" id="T_phot_spinbtn">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="max_length">4</property>
+                        <property name="invisible_char">●</property>
+                        <property name="primary_icon_activatable">False</property>
+                        <property name="secondary_icon_activatable">False</property>
+                        <property name="primary_icon_sensitive">True</property>
+                        <property name="secondary_icon_sensitive">True</property>
+                        <property name="adjustment">T_phot_adj</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="top_attach">1</property>
+                        <property name="bottom_attach">2</property>
+                        <property name="x_options">GTK_EXPAND</property>
+                        <property name="y_options">GTK_EXPAND</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkSpinButton" id="v_outer_spinbtn">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="max_length">4</property>
+                        <property name="invisible_char">●</property>
+                        <property name="primary_icon_activatable">False</property>
+                        <property name="secondary_icon_activatable">False</property>
+                        <property name="primary_icon_sensitive">True</property>
+                        <property name="secondary_icon_sensitive">True</property>
+                        <property name="adjustment">v_outer_adj</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="top_attach">2</property>
+                        <property name="bottom_attach">3</property>
+                        <property name="x_options">GTK_EXPAND</property>
+                        <property name="y_options">GTK_EXPAND</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkSpinButton" id="min_wl_spinbtn">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="max_length">5</property>
+                        <property name="invisible_char">●</property>
+                        <property name="primary_icon_activatable">False</property>
+                        <property name="secondary_icon_activatable">False</property>
+                        <property name="primary_icon_sensitive">True</property>
+                        <property name="secondary_icon_sensitive">True</property>
+                        <property name="adjustment">min_wl_adj</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="top_attach">3</property>
+                        <property name="bottom_attach">4</property>
+                        <property name="x_options">GTK_EXPAND</property>
+                        <property name="y_options">GTK_EXPAND</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkSpinButton" id="max_wl_spinbtn">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="max_length">5</property>
+                        <property name="invisible_char">●</property>
+                        <property name="primary_icon_activatable">False</property>
+                        <property name="secondary_icon_activatable">False</property>
+                        <property name="primary_icon_sensitive">True</property>
+                        <property name="secondary_icon_sensitive">True</property>
+                        <property name="adjustment">max_wl_adj</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="top_attach">4</property>
+                        <property name="bottom_attach">5</property>
+                        <property name="x_options">GTK_EXPAND</property>
+                        <property name="y_options">GTK_EXPAND</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkSpinButton" id="wl_step_spinbtn">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="max_length">4</property>
+                        <property name="invisible_char">●</property>
+                        <property name="primary_icon_activatable">False</property>
+                        <property name="secondary_icon_activatable">False</property>
+                        <property name="primary_icon_sensitive">True</property>
+                        <property name="secondary_icon_sensitive">True</property>
+                        <property name="adjustment">wl_step_adj</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -706,5 +820,19 @@
         </child>
       </object>
     </child>
+  </object>
+  <object class="GtkAdjustment" id="v_phot_adj">
+    <property name="lower">1</property>
+    <property name="upper">99</property>
+    <property name="value">10</property>
+    <property name="step_increment">0.25</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="wl_step_adj">
+    <property name="lower">1</property>
+    <property name="upper">100</property>
+    <property name="value">5</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
   </object>
 </interface>

@@ -5,7 +5,15 @@
 /* pointers for all the widgets */
 Gtk::Window *pWindow = 0;
 Gtk::Button *pQuitButton = 0, *pSaveParamsButton = 0;
-Gtk::SpinButton *pKIDSpin1 = 0, *pKIDSpin2 = 0;
+Gtk::SpinButton *pv_phot_spinbtn = 0, *pT_phot_spinbtn = 0, *pv_outer_spinbtn = 0,
+                *pmin_wl_spinbtn = 0, *pmax_wl_spinbtn = 0, *pwl_step_spinbtn = 0;
+Gtk::SpinButton *p_s01_kid_spinbtn = 0, *p_s02_kid_spinbtn = 0;
+Gtk::SpinButton *p_s01_logtau_spinbtn = 0, *p_s02_logtau_spinbtn = 0;
+Gtk::SpinButton *p_s01_v_min_spinbtn = 0, *p_s02_v_min_spinbtn = 0;
+Gtk::SpinButton *p_s01_v_max_spinbtn = 0, *p_s02_v_max_spinbtn = 0;
+Gtk::SpinButton *p_s01_aux_spinbtn = 0, *p_s02_aux_spinbtn = 0;
+Gtk::SpinButton *p_s01_T_ex_spinbtn = 0, *p_s02_T_ex_spinbtn = 0;
+Gtk::CheckButton *p_s01_active_checkbtn = 0, *p_s02_active_checkbtn = 0;
 
 static void quit_syngui() {
     if (pWindow) {
@@ -17,17 +25,17 @@ static void print_kids() {
     /* Eventuall this YAML emitter will be much more automagic. */
     YAML::Node node;
 
-    node["output"]["min_wl"] =  3300.0;
-    node["output"]["max_wl"] = 10000.0;
-    node["output"]["wl_step"] =    5.0;
+    node["output"]["min_wl"] =  pmin_wl_spinbtn->get_value();
+    node["output"]["max_wl"] = pmax_wl_spinbtn->get_value();
+    node["output"]["wl_step"] = pwl_step_spinbtn->get_value();
 
     node["grid"]["bin_width"] =    0.3;
     node["grid"]["v_size"] =     100;
-    node["grid"]["v_outer_max"] = 30.0;
+    node["grid"]["v_outer_max"] = 60.0;
 
     node["opacity"]["line_dir"]    = "/Users/brian/es-data/lines";
     node["opacity"]["ref_File"]    = "/Users/brian/es-data/refs.dat";
-    node["opacity"]["form"]        = "hexp";
+    node["opacity"]["form"]        = "exp";
     node["opacity"]["v_ref"]       = 6.0;
     node["opacity"]["log_tau_min"] = -2.0;
 
@@ -39,26 +47,26 @@ static void print_kids() {
     node["setups"]["a0"] = 1.0;
     node["setups"]["a1"] = 0.0;
     node["setups"]["a2"] = 0.0;
-    node["setups"]["v_phot"] = 10.0;
-    node["setups"]["v_outer"] = 60.0;
-    node["setups"]["t_phot"] = 12.0;
-    node["setups"]["t_phot"] = 12.0;
 
-    node["setups"]["ions"].push_back(pKIDSpin1->get_value());
-    node["setups"]["active"].push_back("Yes");
-    node["setups"]["log_tau"].push_back(0.3);
-    node["setups"]["v_min"].push_back(6.0);
-    node["setups"]["v_max"].push_back(30.0);
-    node["setups"]["aux"].push_back(1.0);
-    node["setups"]["temp"].push_back(7.0);
+    node["setups"]["v_phot"] = pv_phot_spinbtn->get_value();
+    node["setups"]["t_phot"] = pT_phot_spinbtn->get_value();
+    node["setups"]["v_outer"] = pv_outer_spinbtn->get_value();
 
-    node["setups"]["ions"].push_back(pKIDSpin2->get_value());
-    node["setups"]["active"].push_back("No");
-    node["setups"]["log_tau"].push_back(0.5);
-    node["setups"]["v_min"].push_back(6.5);
-    node["setups"]["v_max"].push_back(30.5);
-    node["setups"]["aux"].push_back(1.5);
-    node["setups"]["temp"].push_back(7.5);
+    node["setups"]["ions"].push_back(p_s01_kid_spinbtn->get_value());
+    node["setups"]["active"].push_back(p_s01_active_checkbtn->get_active() ? "Yes" : "No");
+    node["setups"]["log_tau"].push_back(p_s01_logtau_spinbtn->get_value());
+    node["setups"]["v_min"].push_back(p_s01_v_min_spinbtn->get_value());
+    node["setups"]["v_max"].push_back(p_s01_v_max_spinbtn->get_value());
+    node["setups"]["aux"].push_back(p_s01_aux_spinbtn->get_value());
+    node["setups"]["temp"].push_back(p_s01_T_ex_spinbtn->get_value());
+
+    node["setups"]["ions"].push_back(p_s02_kid_spinbtn->get_value());
+    node["setups"]["active"].push_back(p_s02_active_checkbtn->get_active() ? "Yes" : "No");
+    node["setups"]["log_tau"].push_back(p_s02_logtau_spinbtn->get_value());
+    node["setups"]["v_min"].push_back(p_s02_v_min_spinbtn->get_value());
+    node["setups"]["v_max"].push_back(p_s02_v_max_spinbtn->get_value());
+    node["setups"]["aux"].push_back(p_s02_aux_spinbtn->get_value());
+    node["setups"]["temp"].push_back(p_s02_T_ex_spinbtn->get_value());
 
     YAML::Emitter out;
     out << node;
@@ -99,16 +107,56 @@ int main(int argc, char* argv[]) {
         pSaveParamsButton->signal_clicked().connect (sigc::ptr_fun(print_kids));
     }
 
-    builder->get_widget("s01_kurucz_id_spinbtn", pKIDSpin1);
-    builder->get_widget("s02_kurucz_id_spinbtn", pKIDSpin2);
+    builder->get_widget("s01_kid_spinbtn", p_s01_kid_spinbtn);
+    builder->get_widget("s01_active_checkbtn", p_s01_active_checkbtn);
+    builder->get_widget("s01_logtau_spinbtn", p_s01_logtau_spinbtn);
+    builder->get_widget("s01_v_min_spinbtn", p_s01_v_min_spinbtn);
+    builder->get_widget("s01_v_max_spinbtn", p_s01_v_max_spinbtn);
+    builder->get_widget("s01_aux_spinbtn", p_s01_aux_spinbtn);
+    builder->get_widget("s01_T_ex_spinbtn", p_s01_T_ex_spinbtn);
+
+    builder->get_widget("s02_kid_spinbtn", p_s02_kid_spinbtn);
+    builder->get_widget("s02_active_checkbtn", p_s02_active_checkbtn);
+    builder->get_widget("s02_logtau_spinbtn", p_s02_logtau_spinbtn);
+    builder->get_widget("s02_v_min_spinbtn", p_s02_v_min_spinbtn);
+    builder->get_widget("s02_v_max_spinbtn", p_s02_v_max_spinbtn);
+    builder->get_widget("s02_aux_spinbtn", p_s02_aux_spinbtn);
+    builder->get_widget("s02_T_ex_spinbtn", p_s02_T_ex_spinbtn);
+
+    builder->get_widget("v_phot_spinbtn", pv_phot_spinbtn);
+    builder->get_widget("T_phot_spinbtn", pT_phot_spinbtn);
+    builder->get_widget("v_outer_spinbtn", pv_outer_spinbtn);
+    builder->get_widget("min_wl_spinbtn", pmin_wl_spinbtn);
+    builder->get_widget("max_wl_spinbtn", pmax_wl_spinbtn);
+    builder->get_widget("wl_step_spinbtn", pwl_step_spinbtn);
 
     kit.run(*pWindow);
 
     delete pWindow;
     delete pQuitButton;
     delete pSaveParamsButton;
-    delete pKIDSpin1;
-    delete pKIDSpin2;
+    delete pv_phot_spinbtn;
+    delete pT_phot_spinbtn;
+    delete pv_outer_spinbtn;
+    delete pmin_wl_spinbtn;
+    delete pmax_wl_spinbtn;
+    delete pwl_step_spinbtn;
+
+    delete p_s01_kid_spinbtn;
+    delete p_s01_active_checkbtn;
+    delete p_s01_logtau_spinbtn;
+    delete p_s01_v_min_spinbtn;
+    delete p_s01_v_max_spinbtn;
+    delete p_s01_aux_spinbtn;
+    delete p_s01_T_ex_spinbtn;
+
+    delete p_s02_kid_spinbtn;
+    delete p_s02_active_checkbtn;
+    delete p_s02_logtau_spinbtn;
+    delete p_s02_v_min_spinbtn;
+    delete p_s02_v_max_spinbtn;
+    delete p_s02_aux_spinbtn;
+    delete p_s02_T_ex_spinbtn;
 
     return 0;
 }
