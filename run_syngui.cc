@@ -7,17 +7,13 @@ Gtk::Window *pWindow = 0;
 Gtk::Button *pQuitButton = 0, *pSaveParamsButton = 0;
 Gtk::SpinButton *pKIDSpin1 = 0, *pKIDSpin2 = 0;
 
-static void
-quit_syngui()
-{
+static void quit_syngui() {
     if (pWindow) {
         pWindow->hide();
     }
 }
 
-static void
-print_kids()
-{
+static void print_kids() {
     /* Eventuall this YAML emitter will be much more automagic. */
     YAML::Node node;
 
@@ -71,8 +67,7 @@ print_kids()
     std::cout << std::endl << std::endl;
 }
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char* argv[]) {
  /* make sure to call this FIRST, otherwise you'll get spammed with errors about
   * 'you forgot to call g_type_init()!' */
     Gtk::Main kit(argc, argv);
