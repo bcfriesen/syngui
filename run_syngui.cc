@@ -7,9 +7,6 @@ Gtk::Window *pWindow = 0;
 Gtk::Button *pQuitButton = 0, *pSaveParamsButton = 0;
 Gtk::SpinButton *pKIDSpin1 = 0, *pKIDSpin2 = 0;
 
-
-unsigned int kid1, kid2; /* Kurucz IDs for each species */
-
 static void
 quit_syngui()
 {
@@ -21,9 +18,6 @@ quit_syngui()
 static void
 print_kids()
 {
-    kid1 = pKIDSpin1->get_value();
-    kid2 = pKIDSpin2->get_value();
-
     /* Eventuall this YAML emitter will be much more automagic. */
     YAML::Node node;
 
@@ -54,7 +48,7 @@ print_kids()
     node["setups"]["t_phot"] = 12.0;
     node["setups"]["t_phot"] = 12.0;
 
-    node["setups"]["ions"].push_back(kid1);
+    node["setups"]["ions"].push_back(pKIDSpin1->get_value());
     node["setups"]["active"].push_back("Yes");
     node["setups"]["log_tau"].push_back(0.3);
     node["setups"]["v_min"].push_back(6.0);
@@ -62,7 +56,7 @@ print_kids()
     node["setups"]["aux"].push_back(1.0);
     node["setups"]["temp"].push_back(7.0);
 
-    node["setups"]["ions"].push_back(kid2);
+    node["setups"]["ions"].push_back(pKIDSpin2->get_value());
     node["setups"]["active"].push_back("No");
     node["setups"]["log_tau"].push_back(0.5);
     node["setups"]["v_min"].push_back(6.5);
