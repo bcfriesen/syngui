@@ -6,7 +6,7 @@
     <property name="lower">1</property>
     <property name="upper">99</property>
     <property name="value">12</property>
-    <property name="step_increment">0.25</property>
+    <property name="step_increment">0.10000000000000001</property>
     <property name="page_increment">10</property>
   </object>
   <object class="GtkAdjustment" id="max_wl_adj">
@@ -34,7 +34,7 @@
     <property name="lower">0.01</property>
     <property name="upper">100</property>
     <property name="value">1</property>
-    <property name="step_increment">0.01</property>
+    <property name="step_increment">0.10000000000000001</property>
     <property name="page_increment">10</property>
   </object>
   <object class="GtkAdjustment" id="s01_kid_adj">
@@ -55,7 +55,7 @@
     <property name="lower">1</property>
     <property name="upper">100</property>
     <property name="value">60</property>
-    <property name="step_increment">1</property>
+    <property name="step_increment">0.10000000000000001</property>
     <property name="page_increment">10</property>
   </object>
   <object class="GtkAdjustment" id="s01_v_min_adj">
@@ -76,7 +76,7 @@
     <property name="lower">0.01</property>
     <property name="upper">100</property>
     <property name="value">1</property>
-    <property name="step_increment">0.01</property>
+    <property name="step_increment">0.10000000000000001</property>
     <property name="page_increment">10</property>
   </object>
   <object class="GtkAdjustment" id="s02_kid_adj">
@@ -97,7 +97,7 @@
     <property name="lower">1</property>
     <property name="upper">100</property>
     <property name="value">60</property>
-    <property name="step_increment">1</property>
+    <property name="step_increment">0.10000000000000001</property>
     <property name="page_increment">10</property>
   </object>
   <object class="GtkAdjustment" id="s02_v_min_adj">
@@ -105,13 +105,6 @@
     <property name="upper">100</property>
     <property name="value">10</property>
     <property name="step_increment">0.10000000000000001</property>
-    <property name="page_increment">10</property>
-  </object>
-  <object class="GtkAdjustment" id="v_outer_adj">
-    <property name="lower">1</property>
-    <property name="upper">99</property>
-    <property name="value">60</property>
-    <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
   <object class="GtkWindow" id="syn++-gui_window">
@@ -311,6 +304,7 @@
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
                         <property name="adjustment">s01_logtau_adj</property>
+                        <property name="digits">2</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -331,6 +325,7 @@
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
                         <property name="adjustment">s02_logtau_adj</property>
+                        <property name="digits">2</property>
                       </object>
                       <packing>
                         <property name="left_attach">2</property>
@@ -351,6 +346,7 @@
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
                         <property name="adjustment">s01_v_min_adj</property>
+                        <property name="digits">1</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -371,6 +367,7 @@
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
                         <property name="adjustment">s02_v_min_adj</property>
+                        <property name="digits">1</property>
                       </object>
                       <packing>
                         <property name="left_attach">2</property>
@@ -391,6 +388,7 @@
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
                         <property name="adjustment">s01_v_max_adj</property>
+                        <property name="digits">1</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -411,6 +409,7 @@
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
                         <property name="adjustment">s02_v_max_adj</property>
+                        <property name="digits">1</property>
                       </object>
                       <packing>
                         <property name="left_attach">2</property>
@@ -431,6 +430,7 @@
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
                         <property name="adjustment">s01_aux_adj</property>
+                        <property name="digits">1</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -451,6 +451,7 @@
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
                         <property name="adjustment">s02_aux_adj</property>
+                        <property name="digits">1</property>
                       </object>
                       <packing>
                         <property name="left_attach">2</property>
@@ -471,6 +472,7 @@
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
                         <property name="adjustment">s01_T_ex_adj</property>
+                        <property name="digits">1</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -491,6 +493,7 @@
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
                         <property name="adjustment">s02_T_ex_adj</property>
+                        <property name="digits">1</property>
                       </object>
                       <packing>
                         <property name="left_attach">2</property>
@@ -610,6 +613,7 @@
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
                         <property name="adjustment">v_phot_adj</property>
+                        <property name="digits">1</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -629,6 +633,7 @@
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
                         <property name="adjustment">T_phot_adj</property>
+                        <property name="digits">1</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -650,6 +655,7 @@
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
                         <property name="adjustment">v_outer_adj</property>
+                        <property name="digits">1</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -671,6 +677,7 @@
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
                         <property name="adjustment">min_wl_adj</property>
+                        <property name="digits">1</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -692,6 +699,7 @@
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
                         <property name="adjustment">max_wl_adj</property>
+                        <property name="digits">1</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -713,6 +721,7 @@
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
                         <property name="adjustment">wl_step_adj</property>
+                        <property name="digits">1</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -821,11 +830,18 @@
       </object>
     </child>
   </object>
+  <object class="GtkAdjustment" id="v_outer_adj">
+    <property name="lower">1</property>
+    <property name="upper">99</property>
+    <property name="value">60</property>
+    <property name="step_increment">0.10000000000000001</property>
+    <property name="page_increment">10</property>
+  </object>
   <object class="GtkAdjustment" id="v_phot_adj">
     <property name="lower">1</property>
     <property name="upper">99</property>
     <property name="value">10</property>
-    <property name="step_increment">0.25</property>
+    <property name="step_increment">0.10000000000000001</property>
     <property name="page_increment">10</property>
   </object>
   <object class="GtkAdjustment" id="wl_step_adj">
