@@ -7,12 +7,12 @@ Gtk::Window *pWindow = 0;
 Gtk::Button *pQuitButton = 0, *pSaveParamsButton = 0;
 Gtk::SpinButton *pv_phot_spinbtn = 0, *pT_phot_spinbtn = 0, *pv_outer_spinbtn = 0,
                 *pmin_wl_spinbtn = 0, *pmax_wl_spinbtn = 0, *pwl_step_spinbtn = 0;
-Gtk::SpinButton *p_s01_kid_spinbtn = 0, *p_s02_kid_spinbtn = 0;
-Gtk::SpinButton *p_s01_logtau_spinbtn = 0, *p_s02_logtau_spinbtn = 0;
-Gtk::SpinButton *p_s01_v_min_spinbtn = 0, *p_s02_v_min_spinbtn = 0;
-Gtk::SpinButton *p_s01_v_max_spinbtn = 0, *p_s02_v_max_spinbtn = 0;
-Gtk::SpinButton *p_s01_aux_spinbtn = 0, *p_s02_aux_spinbtn = 0;
-Gtk::SpinButton *p_s01_T_ex_spinbtn = 0, *p_s02_T_ex_spinbtn = 0;
+Gtk::SpinButton *p_s01_kid_spinbtn    = 0, *p_s02_kid_spinbtn    = 0,
+                *p_s01_logtau_spinbtn = 0, *p_s02_logtau_spinbtn = 0,
+                *p_s01_v_min_spinbtn  = 0, *p_s02_v_min_spinbtn  = 0,
+                *p_s01_v_max_spinbtn  = 0, *p_s02_v_max_spinbtn  = 0,
+                *p_s01_aux_spinbtn    = 0, *p_s02_aux_spinbtn    = 0,
+                *p_s01_T_ex_spinbtn   = 0, *p_s02_T_ex_spinbtn   = 0;
 Gtk::CheckButton *p_s01_active_checkbtn = 0, *p_s02_active_checkbtn = 0;
 
 static void quit_syngui() {
@@ -22,9 +22,10 @@ static void quit_syngui() {
 }
 
 static void print_kids() {
-    /* Eventuall this YAML emitter will be much more automagic. */
+    /* Eventually this YAML emitter will be much more automagic. */
     YAML::Node node;
 
+    // first set the setup-independent parameters
     node["output"]["min_wl"] =  pmin_wl_spinbtn->get_value();
     node["output"]["max_wl"] = pmax_wl_spinbtn->get_value();
     node["output"]["wl_step"] = pwl_step_spinbtn->get_value();
@@ -34,7 +35,7 @@ static void print_kids() {
     node["grid"]["v_outer_max"] = 60.0;
 
     node["opacity"]["line_dir"]    = "/Users/brian/es-data/lines";
-    node["opacity"]["ref_File"]    = "/Users/brian/es-data/refs.dat";
+    node["opacity"]["ref_file"]    = "/Users/brian/es-data/refs.dat";
     node["opacity"]["form"]        = "exp";
     node["opacity"]["v_ref"]       = 6.0;
     node["opacity"]["log_tau_min"] = -2.0;
@@ -44,35 +45,68 @@ static void print_kids() {
     node["spectrum"]["p_size"] = 60;
     node["spectrum"]["flatten"] = "No";
 
-    node["setups"]["a0"] = 1.0;
-    node["setups"]["a1"] = 0.0;
-    node["setups"]["a2"] = 0.0;
+    // save each setup as a separate node
+    YAML::Node setup1;
 
-    node["setups"]["v_phot"] = pv_phot_spinbtn->get_value();
-    node["setups"]["t_phot"] = pT_phot_spinbtn->get_value();
-    node["setups"]["v_outer"] = pv_outer_spinbtn->get_value();
+    setup1["a0"] = 1.0;
+    setup1["a1"] = 0.0;
+    setup1["a2"] = 0.0;
 
-    node["setups"]["ions"].push_back(p_s01_kid_spinbtn->get_value());
-    node["setups"]["active"].push_back(p_s01_active_checkbtn->get_active() ? "Yes" : "No");
-    node["setups"]["log_tau"].push_back(p_s01_logtau_spinbtn->get_value());
-    node["setups"]["v_min"].push_back(p_s01_v_min_spinbtn->get_value());
-    node["setups"]["v_max"].push_back(p_s01_v_max_spinbtn->get_value());
-    node["setups"]["aux"].push_back(p_s01_aux_spinbtn->get_value());
-    node["setups"]["temp"].push_back(p_s01_T_ex_spinbtn->get_value());
+    setup1["v_phot"] = 10.0;
+    setup1["v_outer"] = 60.0;
+    setup1["t_phot"] = 12.0;
 
-    node["setups"]["ions"].push_back(p_s02_kid_spinbtn->get_value());
-    node["setups"]["active"].push_back(p_s02_active_checkbtn->get_active() ? "Yes" : "No");
-    node["setups"]["log_tau"].push_back(p_s02_logtau_spinbtn->get_value());
-    node["setups"]["v_min"].push_back(p_s02_v_min_spinbtn->get_value());
-    node["setups"]["v_max"].push_back(p_s02_v_max_spinbtn->get_value());
-    node["setups"]["aux"].push_back(p_s02_aux_spinbtn->get_value());
-    node["setups"]["temp"].push_back(p_s02_T_ex_spinbtn->get_value());
+    std::vector<int> ions;
+    ions.push_back(p_s01_kid_spinbtn->get_value());
+    ions.push_back(p_s02_kid_spinbtn->get_value());
+    setup1["ions"] = ions;
+
+    std::vector<std::string> active;
+    active.push_back(p_s01_active_checkbtn->get_active() ? "Yes" : "No");
+    active.push_back(p_s02_active_checkbtn->get_active() ? "Yes" : "No");
+    setup1["active"] = active;
+
+    std::vector<double> log_tau;
+    log_tau.push_back(p_s01_logtau_spinbtn->get_value());
+    log_tau.push_back(p_s02_logtau_spinbtn->get_value());
+    setup1["log_tau"] = log_tau;
+
+    std::vector<double> v_min;
+    v_min.push_back(p_s01_v_min_spinbtn->get_value());
+    v_min.push_back(p_s02_v_min_spinbtn->get_value());
+    setup1["v_min"] = v_min;
+
+    std::vector<double> v_max;
+    v_max.push_back(p_s01_v_max_spinbtn->get_value());
+    v_max.push_back(p_s02_v_max_spinbtn->get_value());
+    setup1["v_max"] = v_max;
+
+    std::vector<double> aux;
+    aux.push_back(p_s01_aux_spinbtn->get_value());
+    aux.push_back(p_s02_aux_spinbtn->get_value());
+    setup1["aux"] = aux;
+
+    std::vector<double> temp;
+    temp.push_back(p_s01_T_ex_spinbtn->get_value());
+    temp.push_back(p_s02_T_ex_spinbtn->get_value());
+    setup1["temp"] = temp;
 
     YAML::Emitter out;
-    out << node;
+
+    out << node; // first dump setup-indepenent parameters
+
+    // now dump each setup
+    out << YAML::BeginMap;
+    out << YAML::Key << "setups";
+
+    out << YAML::Value;
+    out << YAML::BeginSeq;
+    out << setup1; // if you had more than one setup you would dump the rest here
+    out << YAML::EndSeq;
+
+    out << YAML::EndMap;
 
     std::cout << out.c_str() << std::endl;
-    std::cout << std::endl << std::endl;
 }
 
 int main(int argc, char* argv[]) {
